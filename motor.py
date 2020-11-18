@@ -46,7 +46,7 @@ class Motor():
 
 if __name__ == "__main__":
     print("Motor Test")
-    motor = Motor(0, 0)
+    motor = Motor(12, 13)
 
     motor.setSpeed(50)
     time.sleep(1)

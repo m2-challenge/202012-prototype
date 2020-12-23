@@ -1,5 +1,6 @@
 import time
 import datetime
+import traceback
 from log import*
 from adc import*
 from motor import*
@@ -13,27 +14,34 @@ if __name__ == "__main__":
 
     try:
         #--- Initialization ---#
+        print("\n#----- Initialization -----#")
         logName = fileName("log/log", "txt")
         now = datetime.datetime.fromtimestamp(time.time())
-        saveLog(logName, logname, now.strftime('%Y/%m/%d %H:%M:%S'))
+        saveLog(logName, logName, now.strftime('%Y/%m/%d %H:%M:%S'))
+        print("Log File Name : " + logName)
+        print(now.strftime('%Y/%m/%d %H:%M:%S') + " JST")
 
         #--- Main Process ---#
+        print("\n\n#----- Main Process -----#")
         for i in range(100):
             volt74 = adc.GetVoltage(ch=0) * 3.75
             volt37 = adc.GetVoltage(ch=1) * 2.0
+            motor.setSpeed(50)
             saveLog(logName, time.time(), i, volt74, volt37)
             time.sleep(0.1)
             print(i)
 
     except KeyboardInterrupt:
-        print("\nKeyboard Interrupt")
+        print("\n\n#----- Keyboard Interrupt -----#")
     except:
-        print(traceback.format_exc())
+        print("\n\n#----- Error -----#")
         errorLogName = fileName("log/errorLog", "txt")
+        print(errorLogName)
+        print(traceback.format_exc())
         saveLog(errorLogName, time.time(), "Error")
         saveLog(errorLogName, traceback.format_exc())
         saveLog(errorLogName, "\n")
     finally:
         motor.stop()
         adc.Cleanup()
-        print("\nexit program")
+        print("\n#----- Exit program -----#\n\n")

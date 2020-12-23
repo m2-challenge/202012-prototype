@@ -3,6 +3,12 @@ import linecache
 
 
 def saveLog(path, *data):
+    """Save Log File
+
+    Args:
+        path (string): file path of log
+        date : log date
+    """
     with open(path, "a") as f:
         for i in range(len(data)):
             if isinstance(data[i], list):
@@ -16,6 +22,15 @@ def saveLog(path, *data):
 
 
 def fileName(f, ext):
+    """Create File Name
+
+    Args:
+        f (string): file name exclude extension
+        ext (string): file extension
+
+    Returns:
+        string: new file name
+    """
     i = 0
     num = ""
     while 1:

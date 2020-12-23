@@ -19,7 +19,7 @@ if __name__ == "__main__":
         now = datetime.datetime.fromtimestamp(time.time())
         saveLog(logName, logName, now.strftime('%Y/%m/%d %H:%M:%S'))
         print("Log File Name : " + logName)
-        print(now.strftime('%Y/%m/%d %H:%M:%S') + " JST")
+        print(now.strftime('%Y/%m/%d %H:%M:%S') + " UTC")
 
         #--- Main Process ---#
         print("\n\n#----- Main Process -----#")
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     except:
         print("\n\n#----- Error -----#")
         errorLogName = fileName("log/errorLog", "txt")
-        print(errorLogName)
+        print("Error Log File : " + errorLogName)
         print(traceback.format_exc())
         saveLog(errorLogName, time.time(), "Error")
         saveLog(errorLogName, traceback.format_exc())

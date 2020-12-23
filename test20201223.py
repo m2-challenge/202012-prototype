@@ -19,8 +19,8 @@ if __name__ == "__main__":
 
         #--- Main Process ---#
         for i in range(100):
-            volt74 = adc.GetVoltage(ch=0) * 1.0
-            volt37 = adc.GetVoltage(ch=1) * 1.0
+            volt74 = adc.GetVoltage(ch=0) * 3.75
+            volt37 = adc.GetVoltage(ch=1) * 2.0
             saveLog(logName, time.time(), i, volt74, volt37)
             time.sleep(0.1)
             print(i)

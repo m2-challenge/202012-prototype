@@ -45,9 +45,9 @@ if __name__ == '__main__':
     try:
         while True:
             volts = ADC.GetVoltage(ch=0)
-            print("volts ch0: {:8.2f}".format(volts))
-            #volts = ADC.GetVoltage(ch=1)
-            #print("volts ch1: {:8.2f}".format(volts))
+            print("volts ch0: {:8.2f}".format(volts*3.75))
+            volts = ADC.GetVoltage(ch=1)
+            print("volts ch1: {:8.2f}".format(volts*2.0))
             #volts = ADC.GetVoltage(ch=2)
             #print("volts ch2: {:8.2f}".format(volts))
             time.sleep(1)

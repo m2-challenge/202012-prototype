@@ -50,17 +50,20 @@ if __name__ == "__main__":
     print("Motor Test")
     motor = Motor(18, 19)
 
-    motor.setSpeed(100)
-    time.sleep(2)
+    try:
+        motor.setSpeed(100)
+        time.sleep(2)
 
-    motor.setSpeed(60)
-    time.sleep(2)
+        #motor.setSpeed(60)
+        #time.sleep(2)
 
-    motor.setSpeed(-70)
-    time.sleep(2)
+        motor.setSpeed(-70)
+        time.sleep(2)
 
-    motor.setSpeed(0)
-    time.sleep(1)
+        motor.setSpeed(0)
+        time.sleep(1)
 
-    motor.stop()
-    print("Done")
+        motor.stop()
+        print("Done")
+    except:
+        motor.stop()

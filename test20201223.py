@@ -23,10 +23,10 @@ if __name__ == "__main__":
 
         #--- Main Process ---#
         print("\n\n#----- Main Process -----#")
-        for i in range(100):
+        for i in range(170):
             volt74 = adc.GetVoltage(ch=0) * 3.75
             volt37 = adc.GetVoltage(ch=1) * 2.0
-            motor.setSpeed(50)
+            motor.setSpeed(100)
             saveLog(logName, time.time(), i, volt74, volt37)
             time.sleep(0.1)
             print(i)

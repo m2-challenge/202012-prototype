@@ -1,28 +1,28 @@
 import os
-import linecache
 
 
 def saveLog(path, *data):
     """Save Log File
+    （dataをpathで指定されたファイルに保存する．dataは可変長引数．それぞれの要素はタブで区切られて書込まれる）
+
 
     Args:
         path (string): file path of log
-        date : log date
+        date (list): log date
     """
     with open(path, "a") as f:
-        for i in range(len(data)):
-            if isinstance(data[i], list):
-                for j in range(len(data[i])):
-                    f.write(str(data[i][j]) + "\t")
-                    #print(str(data[i][j]) + "\t", end="")
+        for d in data:
+            if isinstance(d, list):
+                for d_ in d:
+                    f.write("{}\t".format(d_))
             else:
-                f.write(str(data[i]) + "\t")
+                f.write("{}\t".format(d))
         f.write("\n")
-        # print()
 
 
 def fileName(f, ext):
     """Create File Name
+    （例：f=log_file,ext=.txtとし，ディレクトリ内に"log_file0000.txt", "log_file0001.txt"がある場合，この関数は"log_file0002.txt"）
 
     Args:
         f (string): file name exclude extension
@@ -32,20 +32,12 @@ def fileName(f, ext):
         string: new file name
     """
     i = 0
-    num = ""
     while 1:
-        num = ""
-        if(len(str(i)) <= 4):
-            for j in range(4 - len(str(i))):
-                num = num + "0"
-            num = num + str(i)
-        else:
-            num = str(i)
-        if not(os.path.exists(f + num + "." + ext)):
+        file_name = "{0}{1:0>4}.{2}".format(f, i, ext)
+        if not os.path.exists(file_name):
             break
         i = i + 1
-    f = f + num + "." + ext
-    return f
+    return file_name
 
 
 if __name__ == "__main__":
@@ -53,4 +45,6 @@ if __name__ == "__main__":
     print(name)
 
     data = [10, 20, 30, 40, 50]
+    saveLog(name, data)
+    data = 10
     saveLog(name, data)

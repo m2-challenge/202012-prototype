@@ -9,16 +9,26 @@ class MCP3208_Class:
     baud = 50000
     flags = 0
 
-    """コンストラクタ"""
-
     def __init__(self, pi, ref_volts):
+        """Initialize SPI port
+
+        Args:
+            pi (pigpio): pigpio
+            ref_volts (float): Reference Volt
+        """
         self.pi = pi
         self.ref_volts = ref_volts
         self.h = pi.spi_open(self.channel, self.baud, self.flags)
 
-    """電圧取得"""
-
     def GetVoltage(self, ch):
+        """Get Voltage of channel ch
+
+        Args:
+            ch (int): channel
+
+        Returns:
+            float: voltage of ch
+        """
         #c, raw = self.pi.spi_xfer(self.h,[0x6,(8+ch)<<4,0])
         #c, raw = self.pi.spi_xfer(self.h,[0x6,ch<<6,0])
         c, raw = self.pi.spi_xfer(self.h, [1, (8 + ch) << 4, 0])
@@ -28,13 +38,12 @@ class MCP3208_Class:
         volts = round(volts, 4)
         return volts
 
-    """終了処理"""
-
     def Cleanup(self):
+        """Close SPI port
+        """
         self.pi.spi_close(self.h)
 
 
-"""メイン関数"""
 if __name__ == '__main__':
     pi = pigpio.pi()
 
@@ -45,9 +54,9 @@ if __name__ == '__main__':
     try:
         while True:
             volts = ADC.GetVoltage(ch=0)
-            print("volts ch0: {:8.2f}".format(volts*3.75))
+            print("volts ch0: {:8.2f}".format(volts * 3.75))
             volts = ADC.GetVoltage(ch=1)
-            print("volts ch1: {:8.2f}".format(volts*2.0))
+            print("volts ch1: {:8.2f}".format(volts * 2.0))
             #volts = ADC.GetVoltage(ch=2)
             #print("volts ch2: {:8.2f}".format(volts))
             time.sleep(1)
